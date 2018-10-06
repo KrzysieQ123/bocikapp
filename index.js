@@ -186,20 +186,16 @@ bot.on("message", function(msg){
 			return;
 		}else{
 			var server = servers[msg.guild.id];
+			yt.getInfo(link, (err, info)=>{
+				if(err) console.log(err);
+				msg.channel.send("Utwór **"+info.title+"** został dodany do playlisty.");
+			});
 			if(!server.queue[0]){
-				yt.getInfo(link, (err, info)=>{
-					if(err) console.log(err);
-					msg.channel.send("Utwór **"+info.title+"** został dodany do playlisty.");
-				});
 				msg.member.voiceChannel.join().then(function(connection){
 					server.queue.push(input);
 					play(connection, msg);
 				});
 			}else{
-				yt.getInfo(link, (err, info)=>{
-					if(err) console.log(err);
-					msg.channel.send("Utwór **"+info.title+"** został dodany do playlisty.");
-				});
 				server.queue.push(input);
 			}
 		}
