@@ -185,10 +185,6 @@ bot.on("message", function(msg){
 			msg.channel.send("Podaj link.");
 			return;
 		}else{
-			yt.getInfo(link, (err, info)=>{
-				if(err) console.log(err);
-				msg.channel.send("Utwór **"+info.title+"** został dodany do playlisty.");
-			});
 			var server = servers[msg.guild.id];
 			if(!server.queue[0]){
 				msg.member.voiceChannel.join().then(function(connection){
@@ -196,11 +192,16 @@ bot.on("message", function(msg){
 					play(connection, msg);
 					yt.getInfo(server.queue[0], (err, info)=>{
 						if(err) console.log(err);
+						msg.channel.send("Utwór **"+info.title+"** został dodany do playlisty.");
 						msg.channel.send("Aktualnie odtwarzany jest utwór: **"+info.title+"**");
 					});
 				});
 			}else{
 				server.queue.push(input);
+				yt.getInfo(link, (err, info)=>{
+					if(err) console.log(err);
+					msg.channel.send("Utwór **"+info.title+"** został dodany do playlisty.");
+				});
 			}
 		}
 	}
