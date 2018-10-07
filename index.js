@@ -19,14 +19,14 @@ function play(connection, msg){
 	var server = servers[msg.guild.id];
 	var stream = yt(server.queue[0], {filter: "audioonly"});
 	server.dispatcher = connection.playStream(stream, {seek:0,volume:1});
-	yt.getInfo(server.queue[0], (err, info)=>{
-		if(err) console.log(err);
-		msg.channel.send("Aktualnie odtwarzany jest utwór: **"+info.title+"**");
-	});
 	server.dispatcher.on("end", function(){
 		server.queue.shift();
 		if(server.queue[0]){
 			play(connection, msg);
+			yt.getInfo(server.queue[0], (err, info)=>{
+				if(err) console.log(err);
+				msg.channel.send("Aktualnie odtwarzany jest utwór: **"+info.title+"**");
+			});
 		}
 	});
 }
@@ -194,6 +194,10 @@ bot.on("message", function(msg){
 				msg.member.voiceChannel.join().then(function(connection){
 					server.queue.push(input);
 					play(connection, msg);
+					yt.getInfo(server.queue[0], (err, info)=>{
+						if(err) console.log(err);
+						msg.channel.send("Aktualnie odtwarzany jest utwór: **"+info.title+"**");
+					});
 				});
 			}else{
 				server.queue.push(input);
