@@ -185,11 +185,11 @@ bot.on("message", function(msg){
 			msg.channel.send("Podaj link.");
 			return;
 		}else{
-			var server = servers[msg.guild.id];
 			yt.getInfo(link, (err, info)=>{
 				if(err) console.log(err);
 				msg.channel.send("Utwór **"+info.title+"** został dodany do playlisty.");
 			});
+			var server = servers[msg.guild.id];
 			if(!server.queue[0]){
 				msg.member.voiceChannel.join().then(function(connection){
 					server.queue.push(input);
