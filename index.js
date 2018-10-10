@@ -130,7 +130,7 @@ bot.on("message", function(msg){
 				wynik+= ""+text[letter].toLowerCase()+"";
 			}
 			msg.member.voiceChannel.join().then(function(connection){
-				var dispatcher = connection.playStream('http://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=32&client=tw-ob&q='+wynik+'&tl=sr', {seek:0,volume:1});
+				var dispatcher = connection.playStream('http://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=32&client=tw-ob&q='+wynik+'&tl=pl', {seek:0,volume:1});
 				dispatcher.on("end", function(){
 					return;
 				});
