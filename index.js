@@ -11,7 +11,7 @@ if(!fs.existsSync('./permissions.json')){
 	var perm={}
 	console.log("Permissions file is not found. Create default file...");
 	perm.users={}
-	fs.writeFileSync('./permissions.json', JSON.stringify(perm.null,2));
+	fs.writeFileSync('./permissions.json', JSON.stringify(perm,null,2));
 }else{
 	console.log("Permissions file is successfully loaded.")
 }
