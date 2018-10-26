@@ -232,8 +232,8 @@ bot.on("message", function(msg){
 					return msg.channel.send("Aby zmieninić głośność użyj: !volume 1-100.");
 				}else{
 					var server = servers[msg.guild.id];
+					volumeMusic=input/100;
 					if(!server.dispatcher){
-						volumeMusic=input;
 						msg.channel.send(`Głośność została zmieniona na: **${input}**`);
 					}else{
 						server.dispatcher.setVolume((input / 100));
