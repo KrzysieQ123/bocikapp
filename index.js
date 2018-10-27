@@ -1,6 +1,7 @@
 var discord = require("discord.js");
 var fs = require("fs");
 var cleverbot = require("cleverbot.io");
+var ascii=require("ascii-art");
 var yt = require("ytdl-core");
 var config = require("./config.json");
 var bot = new discord.Client();
@@ -262,6 +263,14 @@ bot.on("message", function(msg){
 			}
 			if(server.dispatcher) server.dispatcher.end();
 			msg.guild.voiceConnection.disconnect();
+		}
+	}
+	if(cmd == `${config.prefix}say`){
+		msg.delete();
+		if(input){
+			ascii.font(input, "Doom", function(render){msg.channel.send("```"+render+"```");})
+		}else{
+			return msg.channel.send('Podaj tekst.');
 		}
 	}
 });
