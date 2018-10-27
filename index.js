@@ -5,7 +5,7 @@ var yt = require("ytdl-core");
 var config = require("./config.json");
 var bot = new discord.Client();
 var clever = new cleverbot("Oe6fkgAQ0PYhtTHe", "m4LZjjD91R9rSj9fVzkFiWpmpeQqmpDi");
-var volumeMusic=15;
+var volumeMusic=0.25;
 clever.setNick("LsmBot");
 if(!fs.existsSync('./permissions.json')){
 	var perm={}
