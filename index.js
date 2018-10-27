@@ -236,7 +236,7 @@ bot.on("message", function(msg){
 						volumeMusic=input/100;
 						msg.channel.send(`Głośność została zmieniona na: **${input}**`);
 					}else{
-						server.dispatcher.setVolume((input / 100));
+						server.dispatcher.setVolume(input / 100);
 						msg.channel.send(`Głośność została zmieniona na: **${input}**`);
 					}
 				}
