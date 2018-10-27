@@ -19,7 +19,7 @@ var perm=require('./permissions.json');
 function play(connection, msg){
 	var server = servers[msg.guild.id];
 	var stream = yt(server.queue[0], {filter: "audioonly"});
-	server.dispatcher = connection.playStream(stream, {seek:0,volume:volumeMusic/100});
+	server.dispatcher = connection.playStream(stream, {seek:0,volume:volumeMusic});
 	server.dispatcher.on("end", function(){
 		server.queue.shift();
 		if(server.queue[0]){
@@ -128,7 +128,7 @@ bot.on("message", function(msg){
 				wynik+= ""+text[letter].toLowerCase()+"";
 			}
 			msg.member.voiceChannel.join().then(function(connection){
-				var dispatcher = connection.playStream('http://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=32&client=tw-ob&q='+wynik+'&tl=pl', {seek:0,volume:volumeMusic/100});
+				var dispatcher = connection.playStream('http://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=32&client=tw-ob&q='+wynik+'&tl=pl', {seek:0,volume:volumeMusic});
 				dispatcher.on("end", function(){
 					return;
 				});
@@ -232,11 +232,11 @@ bot.on("message", function(msg){
 					return msg.channel.send("Aby zmieninić głośność użyj: !volume 1-100.");
 				}else{
 					var server = servers[msg.guild.id];
+					volumeMusic=input/100;
 					if(!server.dispatcher){
-						volumeMusic=input/100;
 						msg.channel.send(`Głośność została zmieniona na: **${input}**`);
 					}else{
-						server.dispatcher.setVolume(input / 100);
+						server.dispatcher.setVolume(volumeMusic);
 						msg.channel.send(`Głośność została zmieniona na: **${input}**`);
 					}
 				}
