@@ -274,4 +274,4 @@ bot.on("message", function(msg){
 		}
 	}
 });
-bot.login("NDMwNDkwMjQwMTY0Mjk4Nzc0.DprK5Q.e-kci0A3AoV_sW1Yv1PBWnpMV38");
+bot.login(process.env.BOT_TOKEN);
