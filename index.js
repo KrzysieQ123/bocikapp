@@ -267,7 +267,7 @@ bot.on("message", function(msg){
 		var server = servers[msg.guild.id];
 		if(!server.queue[0]) return msg.channel.send("Aktualnie nic nie jest odtwarzane!");
 		if(server.queue.length>=2){
-			var wynik+=`**lista dodanych utworów**\n`;
+			wynik+=`**lista dodanych utworów**\n`;
 			for(var i=1; i<server.queue.length; i++){
 				var number=["one","two","three","four","five","six","seven","eight","nine","keycap_ten"];
 				if(i<=10){
