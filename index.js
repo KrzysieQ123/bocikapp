@@ -172,7 +172,7 @@ bot.on("message", function(msg){
 				wynik+= ""+text[letter].toLowerCase()+"";
 			}
 			msg.member.voiceChannel.join().then(function(connection){
-				var dispatcher = connection.play('http://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=64&client=tw-ob&q='+wynik+'&tl=pl', {seek:0,volume:volumeMusic});
+				var dispatcher = connection.playStream('http://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=64&client=tw-ob&q='+wynik+'&tl=pl', {seek:0,volume:volumeMusic});
 				console.log(dispatcher.url);
 				// dispatcher.on("end", function(){
 					// return;
