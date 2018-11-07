@@ -173,10 +173,10 @@ bot.on("message", function(msg){
 			}
 			msg.member.voiceChannel.join().then(function(connection){
 				var dispatcher = connection.playStream('http://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=64&client=tw-ob&q='+wynik+'&tl=pl', {seek:0,volume:volumeMusic});
-				console.log(dispatcher.url);
-				// dispatcher.on("end", function(){
-					// return;
-				// });
+				console.log(dispatcher);
+				dispatcher.on("end", function(){
+					return;
+				});
 			});
 		}
 	}
