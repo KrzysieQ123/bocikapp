@@ -173,7 +173,6 @@ bot.on("message", function(msg){
 			}
 			msg.member.voiceChannel.join().then(function(connection){
 				var dispatcher = connection.playStream('http://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=64&client=tw-ob&q='+wynik+'&tl=pl', {seek:0,volume:volumeMusic});
-				console.log(dispatcher);
 				dispatcher.on("end", function(){
 					return;
 				});
@@ -272,7 +271,7 @@ bot.on("message", function(msg){
 				var number=["one","two","three","four","five","six","seven","eight","nine","keycap_ten"];
 				if(i<=10){
 					if(!isNaN(i)){
-						wynik+=`${number[parseInt(i)]}: **{server.musicName[i]}** dodane przez **${server.addBy[i]}**\n`;
+						wynik+=`:${number[parseInt(i)]}:: **{server.musicName[i]}** dodane przez **${server.addBy[i]}**\n`;
 					}
 				}
 				if(i==10){
