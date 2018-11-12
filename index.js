@@ -201,7 +201,7 @@ bot.on("message", function(msg){
 			channel.join().then(function(connection){
 				console.log(`Joined to voice channel on server ${msg.guild.id}.`);
 				msg.channel.send("**Aby dodać jakiś utwór do playlisty użyj komendy: __!play__ oraz podaj link.\nAby pominąć utwór użyj komendy: __!skip__.\nAby zakończyć odtwarzanie użyj komendy: __!leave__.**");
-				if(!servers[msg.guild.id]) servers[msg.guild.id]={queue:[]}
+				if(!servers[msg.guild.id]) servers[msg.guild.id]={queue:[],musicName:[],addBy:[]}
 			});
 			}else{
 				return msg.channel.send('Nie jesteś na kanale głosowym.');
