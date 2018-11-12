@@ -61,7 +61,7 @@ function addMusic(msg, link){
 				if(err) console.log(err);
 				msg.channel.send("Utwór **"+info.title+"** został dodany do playlisty przez **"+server.addBy[0]+"**");
 				msg.channel.send("Aktualnie odtwarzany jest utwór: **"+info.title+"** dodany przez **"+server.addBy[0]+"**");
-				server.queue.musicName.push(info.title);
+				server.musicName.push(info.title);
 			});
 		});
 	}else{
@@ -70,7 +70,7 @@ function addMusic(msg, link){
 		yt.getInfo(server.queue[0], (err, info)=>{
 			if(err) console.log(err);
 			msg.channel.send("Utwór **"+info.title+"** został dodany do playlisty przez **"+msg.guild.member(msg.author.id).displayName+"**");
-			server.queue.musicName.push(info.title);
+			server.musicName.push(info.title);
 		});
 	}
 }
