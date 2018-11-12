@@ -231,7 +231,7 @@ bot.on("message", function(msg){
 					for(var i in maxSearchVideo){
 						var number=["one","two","three","four","five","six","seven","eight","nine","keycap_ten"];
 						if(!isNaN(i)){
-							wynik+=`${number[parseInt(i)]}`;
+							wynik+=`:${number[parseInt(i)]}:`;
 						}
 						wynik+=`**${maxSearchVideo[i].title}**\n\n`;
 					}
