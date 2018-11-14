@@ -36,7 +36,6 @@ function play(connection, msg){
 	var server = servers[msg.guild.id];
 	var stream = yt(server.queue[0], {filter: "audioonly"});
 	server.dispatcher = connection.playStream(stream, {seek:0,volume:volumeMusic});
-	
 	server.dispatcher.on("end", function(){
 		server.queue.shift();
 		server.addBy.shift();
@@ -271,7 +270,7 @@ bot.on("message", function(msg){
 				var number=["one","two","three","four","five","six","seven","eight","nine","keycap_ten"];
 				if(i<=10){
 					if(!isNaN(i)){
-						wynik+=`:${number[parseInt(i)]}:: **{server.musicName[i]}** dodane przez **${server.addBy[i]}**\n`;
+						wynik+=`:${number[parseInt(i)]}:: **${server.musicName[i]}** dodane przez **${server.addBy[i]}**\n`;
 					}
 				}
 				if(i==10){
