@@ -57,7 +57,7 @@ function play(connection, msg){
 			play(connection, msg);
 			yt.getInfo(server.queue[0], (err, info)=>{
 				if(err) console.log(err);
-				msg.channel.send("Aktualnie odtwarzany jest utwór: **"+info.title+"** `"+secondsToMinutes(server.musicLength[i] * 1000)+"` dodany przez **"+server.addBy[0]+"**");
+				msg.channel.send("Aktualnie odtwarzany jest utwór: **"+info.title+"** `"+secondsToMinutes(info.length_seconds * 1000)+"` dodany przez **"+server.addBy[0]+"**");
 			});
 		}
 	});
@@ -72,7 +72,7 @@ function addMusic(msg, link){
 			yt.getInfo(server.queue[0], (err, info)=>{
 				if(err) console.log(err);
 				msg.channel.send("Utwór **"+info.title+"** `"+secondsToMinutes(server.musicLength[i] * 1000)+"` został dodany do playlisty przez **"+server.addBy[0]+"**");
-				msg.channel.send("Aktualnie odtwarzany jest utwór: **"+info.title+"** `"+secondsToMinutes(server.musicLength[i] * 1000)+"` dodany przez **"+server.addBy[0]+"**");
+				msg.channel.send("Aktualnie odtwarzany jest utwór: **"+info.title+"** `"+secondsToMinutes(info.length_seconds * 1000)+"` dodany przez **"+server.addBy[0]+"**");
 				server.musicName.push(info.title);
 				server.musicLength.push(info.length_seconds);
 			});
@@ -82,7 +82,7 @@ function addMusic(msg, link){
 		server.addBy.push(msg.guild.member(msg.author.id).displayName);
 		yt.getInfo(server.queue[0], (err, info)=>{
 			if(err) console.log(err);
-			msg.channel.send("Utwór **"+info.title+"** długość `"+secondsToMinutes(server.musicLength[i] * 1000)+"` został dodany do playlisty przez **"+msg.guild.member(msg.author.id).displayName+"**");
+			msg.channel.send("Utwór **"+info.title+"** długość `"+secondsToMinutes(info.length_seconds * 1000)+"` został dodany do playlisty przez **"+msg.guild.member(msg.author.id).displayName+"**");
 			server.musicName.push(info.title);
 			server.musicLength.push(info.length_seconds);
 		});
