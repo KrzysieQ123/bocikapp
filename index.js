@@ -35,7 +35,7 @@ function replacePolishLetter(string){
 function secondsToTime(value){
 	var s = 1000, m = s*60, h = m*60;
 	var seconds = Math.floor(value/s)%60;
-	if(value < m) return seconds === 1 ? '1 sekunda' : `${seconds} sekund`;
+	if(value < m) return seconds === 1 ? '1 sekunda' : `${seconds} sekund(y)`;
 	var minutes = Math.floor(value/m)%60;
 	var time = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 	if(value >= h){
