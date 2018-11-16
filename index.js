@@ -80,7 +80,7 @@ function addMusic(msg, link){
 	}else{
 		server.queue.push(link);
 		server.addBy.push(msg.guild.member(msg.author.id).displayName);
-		yt.getInfo(server.queue[0], (err, info)=>{
+		yt.getInfo(link, (err, info)=>{
 			if(err) console.log(err);
 			msg.channel.send("Utwór **"+info.title+"** długość **"+secondsToTime(info.length_seconds * 1000)+"** został dodany do playlisty przez **"+msg.guild.member(msg.author.id).displayName+"**");
 			server.musicName.push(info.title);
