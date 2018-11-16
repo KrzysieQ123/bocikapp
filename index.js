@@ -39,7 +39,7 @@ function play(connection, msg){
 	server.dispatcher.on("end", function(){
 		server.queue.shift();
 		server.addBy.shift();
-		server.musicname.shift();
+		server.musicName.shift();
 		if(server.queue[0]){
 			play(connection, msg);
 			yt.getInfo(server.queue[0], (err, info)=>{
