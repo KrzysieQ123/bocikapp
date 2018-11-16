@@ -71,7 +71,7 @@ function addMusic(msg, link){
 			play(connection, msg);
 			yt.getInfo(server.queue[0], (err, info)=>{
 				if(err) console.log(err);
-				msg.channel.send("Utwór **"+info.title+"** `"+secondsToMinutes(server.musicLength[i] * 1000)+"` został dodany do playlisty przez **"+server.addBy[0]+"**");
+				msg.channel.send("Utwór **"+info.title+"** `"+secondsToMinutes(info.length_seconds * 1000)+"` został dodany do playlisty przez **"+server.addBy[0]+"**");
 				msg.channel.send("Aktualnie odtwarzany jest utwór: **"+info.title+"** `"+secondsToMinutes(info.length_seconds * 1000)+"` dodany przez **"+server.addBy[0]+"**");
 				server.musicName.push(info.title);
 				server.musicLength.push(info.length_seconds);
