@@ -8,15 +8,6 @@ var bot = new discord.Client();
 var clever = new cleverbot("Oe6fkgAQ0PYhtTHe", "m4LZjjD91R9rSj9fVzkFiWpmpeQqmpDi");
 var volumeMusic=0.25;
 clever.setNick("LsmBot");
-if(!fs.existsSync('./permissions.json')){
-	var perm={}
-	console.log("Permissions file is not found. Create default file...");
-	perm.users={}
-	fs.writeFileSync('./permissions.json', JSON.stringify(perm,null,2));
-}else{
-	console.log("Permissions file is successfully loaded.")
-}
-var perm=require('./permissions.json');
 function replacePolishLetter(string){
 	var result=string;
 	for(var letter=0; letter<string.length; letter++){
@@ -88,15 +79,35 @@ function addMusic(msg, link){
 		});
 	}
 }
-function savePermissionsFile(){
-	fs.writeFile('./permissions.json', JSON.stringify(perm), function(err){
-		if(err){return false;}
+function checkPermission(id, sid, perm_admin, callback){
+	connection.query("SELECT * FROM `permissions` WHERE `ServerID`='"+sid+"' AND `UserID`='"+id+"'", function(err, result, field){
+		if(err) throw err;
+		if(result.length>0){
+			id=result[0].UserID;
+			sid=result[0].ServerID;
+			perm_admin=result[0].admin;
+		}else{
+			id=0;
+			sid=0;
+			perm_admin=0;
+		}
+		callback(id, sid, perm_admin);
 	});
 }
 var servers = {};
+var connection = mysql.createConnection({
+	host: process.env.host,
+	user: process.env.user,
+	password: process.env.password,
+	database: process.env.database
+});
 clever.create(function (err, session){});
 bot.on("error", console.error);
 bot.on("ready", () =>{
+	connection.connect(function(err){
+		if(err) throw err;
+		console.log("[MySQL] Connected!");
+	});
 	console.log(`${bot.user.username} ready.`);
 	console.log(`Bot running on ${bot.guilds.size} servers.`);
 	bot.user.setPresence({game: {name: `pornhub`, type: 3}});
@@ -194,17 +205,24 @@ bot.on("message", function(msg){
 		}
 	}
 	if(cmd == `${config.prefix}js`){
- 	if(perm.users[msg.author.id].admin==false){msg.delete();return msg.channel.send(msg.author+' Nie posiadasz uprawnien do użycia tej komendy.');}
-        if(input){
-            try{
-                msg.channel.send("Javascript: "+eval(input));
-            }catch(e){
-                msg.channel.send("Javascript: "+e);
-            }
-        }else{
-            return msg.delete();
-        }
-    }
+		var admin;
+		checkPermission(msg.author.id, msg.guild.id, admin, function(id, sid, admin){
+			if(id==msg.author.id && admin>0){
+				if(input){
+					try{
+						msg.channel.send("Javascript: "+eval(input));
+					}catch(e){
+						msg.channel.send("Javascript: "+e);
+					}
+				}else{
+					return msg.delete();
+				}
+			}else{
+				msg.delete();
+				return msg.channel.send(msg.guild.member(msg.author.id).displayName+" nie posiadasz uprawnień do tej komendy!");
+			}
+		});
+	}
 	if(cmd == `${config.prefix}join`){
 		msg.delete();
 		var channel = msg.member.voiceChannel;
