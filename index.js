@@ -3,6 +3,7 @@ var fs = require("fs");
 var cleverbot = require("cleverbot.io");
 var yt = require("ytdl-core");
 var ytsearch = require("yt-search");
+var mysql=require('mysql');
 var config = require("./config.json");
 var bot = new discord.Client();
 var clever = new cleverbot("Oe6fkgAQ0PYhtTHe", "m4LZjjD91R9rSj9fVzkFiWpmpeQqmpDi");
