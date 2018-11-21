@@ -117,7 +117,7 @@ bot.on("message", function(msg){
 	var input = msg.content.substring(cmd.length+1);
 	var params = input.split(' ');
 	if(!cmd.startsWith(config.prefix)){
-		iif(msg.isMentioned(bot.user)){
+		if(msg.isMentioned(bot.user)){
 			msg.channel.startTyping();
 			clever.ask(input, function (err, response){
 				setTimeout(()=>{
