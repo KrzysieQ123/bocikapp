@@ -117,9 +117,9 @@ bot.on("message", function(msg){
 	var input = msg.content.substring(cmd.length+1);
 	var params = input.split(' ');
 	if(!cmd.startsWith(config.prefix)){
-		if(msg.content.includes("<@430490240164298774>")){
+		iif(msg.isMentioned(bot.user)){
 			msg.channel.startTyping();
-			clever.ask(msg.content, function (err, response){
+			clever.ask(input, function (err, response){
 				setTimeout(()=>{
 					msg.reply(response).catch(console.error);
 					msg.channel.stopTyping();
