@@ -80,19 +80,17 @@ function addMusic(msg, link){
 		});
 	}
 }
-function checkPermission(id, sid, perm_admin, callback){
-	connection.query("SELECT * FROM `permissions` WHERE `ServerID`='"+sid+"' AND `UserID`='"+id+"'", function(err, result, field){
+function checkPermission(id, perm_admin, callback){
+	connection.query("SELECT * FROM `permissions` WHERE `UserID`='"+id+"'", function(err, result, field){
 		if(err) throw err;
 		if(result.length>0){
 			id=result[0].UserID;
-			sid=result[0].ServerID;
 			perm_admin=result[0].admin;
 		}else{
 			id=0;
-			sid=0;
 			perm_admin=0;
 		}
-		callback(id, sid, perm_admin);
+		callback(id, perm_admin);
 	});
 }
 var servers = {};
@@ -207,7 +205,7 @@ bot.on("message", function(msg){
 	}
 	if(cmd == `${config.prefix}js`){
 		var admin;
-		checkPermission(msg.author.id, msg.guild.id, admin, function(id, sid, admin){
+		checkPermission(msg.author.id, admin, function(id, admin){
 			if(id==msg.author.id && admin>0){
 				if(input){
 					try{
