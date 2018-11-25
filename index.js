@@ -111,14 +111,6 @@ bot.on("ready", () =>{
 	console.log(`Bot running on ${bot.guilds.size} servers.`);
 	bot.user.setPresence({game: {name: `pornhub`, type: 3}});
 });
-bot.on("guildMemberAdd", member =>{
-	perm.users[member.user.id] = {admin:false};
-	savePermissionsFile();
-});
-bot.on("guildMemberRemove", member =>{
-	delete perm.users[member.user.id];
-	savePermissionsFile();
-});
 bot.on("message", function(msg){
 	if(msg.author.bot) return;
 	if(msg.channel.type === "dm") return;
