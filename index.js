@@ -8,7 +8,7 @@ var config = require("./config.json");
 var bot = new discord.Client();
 var clever = new cleverbot('WCT46Z25xoaNfJoB','Csde8LbACXUNlXCF11xmSk1OA4mnFiT0');
 var volumeMusic=0.25;
-clever.setNick("LsmBot");
+clever.setNick("Bocik");
 function replacePolishLetter(string){
 	var result=string;
 	for(var letter=0; letter<string.length; letter++){
