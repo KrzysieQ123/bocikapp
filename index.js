@@ -100,7 +100,6 @@ var connection = mysql.createConnection({
 	password: process.env.password,
 	database: process.env.database
 });
-clever.create(function (err, session){});
 bot.on("error", console.error);
 bot.on("ready", () =>{
 	connection.connect(function(err){
@@ -121,9 +120,11 @@ bot.on("message", function(msg){
 	if(!cmd.startsWith(config.prefix)){
 		if(msg.isMentioned(bot.user)){
 			msg.channel.startTyping();
-			clever.ask(input, function (err, response){
-				msg.reply(response).catch(console.error);
-				msg.channel.stopTyping();
+			clever.create(function(err, session){
+				clever.ask(input, function(err, response){
+					msg.reply(response).catch(console.error);
+					msg.channel.stopTyping();
+				});
 			});
 		}
 	};
