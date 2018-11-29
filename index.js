@@ -288,11 +288,11 @@ bot.on("message", function(msg){
 		if(!server.queue[0]) return msg.channel.send("Aktualnie nic nie jest odtwarzane!");
 		if(server.queue.length>=2){
 			wynik+=`**lista dodanych utworów**\n`;
-			for(var i=1; i<server.queue.length; i++){
+			for(var i=0; i<server.queue.length; i++){
 				var number=["one","two","three","four","five","six","seven","eight","nine","keycap_ten"];
 				if(i<=10){
 					if(!isNaN(i)){
-						wynik+=`:${number[parseInt(i)]-1}: **${server.musicName[i]}** długość **${secondsToTime(server.musicLength[i] * 1000)}** dodane przez **${server.addBy[i]}**\n`;
+						wynik+=`:${number[parseInt(i)-1]}: **${server.musicName[i]}** długość **${secondsToTime(server.musicLength[i] * 1000)}** dodane przez **${server.addBy[i]}**\n`;
 					}
 				}
 				if(i==10){
