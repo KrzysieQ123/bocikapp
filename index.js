@@ -100,7 +100,7 @@ var connection = mysql.createConnection({
 	password: process.env.password,
 	database: process.env.database
 });
-clever.create(function(err, session){));
+clever.create(function(err, session){});
 bot.on("error", console.error);
 bot.on("ready", () =>{
 	connection.connect(function(err){
