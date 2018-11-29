@@ -292,7 +292,7 @@ bot.on("message", function(msg){
 				var number=["one","two","three","four","five","six","seven","eight","nine","keycap_ten"];
 				if(i<=10){
 					if(!isNaN(i)){
-						wynik+=`:${number[parseInt(i)-1]}: **${server.musicName[i]}** długość **${secondsToTime(server.musicLength[i] * 1000)}** dodane przez **${server.addBy[i]}**\n`;
+						wynik+=`:${number[parseInt(i)]-1}: **${server.musicName[i]}** długość **${secondsToTime(server.musicLength[i] * 1000)}** dodane przez **${server.addBy[i]}**\n`;
 					}
 				}
 				if(i==10){
