@@ -6,7 +6,7 @@ var ytsearch = require("yt-search");
 var mysql=require('mysql');
 var config = require("./config.json");
 var bot = new discord.Client();
-var clever = new cleverbot("Oe6fkgAQ0PYhtTHe", "m4LZjjD91R9rSj9fVzkFiWpmpeQqmpDi");
+var clever = new cleverbot('WCT46Z25xoaNfJoB','Csde8LbACXUNlXCF11xmSk1OA4mnFiT0');
 var volumeMusic=0.25;
 clever.setNick("LsmBot");
 function replacePolishLetter(string){
