@@ -122,10 +122,8 @@ bot.on("message", function(msg){
 		if(msg.isMentioned(bot.user)){
 			msg.channel.startTyping();
 			clever.ask(input, function (err, response){
-				setTimeout(()=>{
-					msg.reply(response).catch(console.error);
-					msg.channel.stopTyping();
-				}, Math.random() * (1 - 3) + 1 * 1000);
+				msg.reply(response).catch(console.error);
+				msg.channel.stopTyping();
 			});
 		}
 	};
