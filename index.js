@@ -251,7 +251,7 @@ bot.on("message", function(msg){
 				}
 			}else{
 				msg.delete();
-				return.msg.channel.send(msg.guild.member(msg.author.id).displayName+" nie posiadasz uprawnień do użycia tej komendy!");
+				return msg.channel.send(msg.guild.member(msg.author.id).displayName+" nie posiadasz uprawnień do użycia tej komendy!");
 			}
 		});
 	}
