@@ -231,7 +231,7 @@ bot.on("message", function(msg){
 	}
 	if(cmd == `${config.prefix}usun`){
 		var admin;
-		checkPermission(msg.author.id, msg.guild.id, admin, function(id, admin){
+		checkPermission(msg.author.id, admin, function(id, admin){
 			if(id==msg.author.id && admin>0){
 				var number = params[0];
 				if(number){
