@@ -229,6 +229,32 @@ bot.on("message", function(msg){
 			}
 		}
 	}
+	if(cmd == `${config.prefix}usun`){
+		var admin;
+		checkPermission(msg.author.id, msg.guild.id, admin, function(id, sid, admin){
+			if(id==msg.author.id && admin>0){
+				var number = params[0];
+				if(number){
+					if(isNaN(number)){
+						return msg.channel.send('Użyj: !usun [liczba wiadomości (limit: 100)].');
+					}
+					if(number > 100) return msg.channel.send('Użyj: !usun [liczba wiadomości (limit: 100)].');
+					async function clearMessages(){
+						const fetched = await msg.channel.fetchMessages({limit: 100});
+						msg.channel.bulkDelete(fetched).catch(error => msg.channel.send(`${error}`));
+					}
+					clearMessages();
+					msg.channel.send('Usunięto '+number+' wiadomości.');
+				}
+				else{
+					return msg.channel.send('Użyj: !usun [liczba wiadomości (limit: 100)].');
+				}
+			}else{
+				msg.delete();
+				return.msg.channel.send(msg.guild.member(msg.author.id).displayName+" nie posiadasz uprawnień do użycia tej komendy!");
+			}
+		});
+	}
 	if(cmd == `${config.prefix}play`){
 		var checkLink = /(?:http(?:s)?:\/\/)?(?:www\.)?(?:youtube(?:-nocookie)?\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/g
 		var link = input;
