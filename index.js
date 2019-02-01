@@ -120,11 +120,26 @@ bot.on("message", function(msg){
 	var params = input.split(' ');
 	if(!cmd.startsWith(config.prefix)){
 		if(msg.isMentioned(bot.user)){
-			msg.channel.startTyping();
-			clever.ask(input, function(err, response){
-				msg.reply(response).catch(console.error);
-				msg.channel.stopTyping();
-			});
+			if(msg.guild.id != 518028075519442946){
+				msg.channel.startTyping();
+				clever.ask(input, function(err, response){
+					msg.reply(response).catch(console.error);
+					msg.channel.stopTyping();
+				});
+			}
+			else
+			{
+				var admin;
+				checkPermission(msg.author.id, admin, function(id, admin){
+					if(id==msg.author.id && admin==0){
+						msg.channel.startTyping();
+						clever.ask(input, function(err, response){
+							msg.reply(response).catch(console.error);
+							msg.channel.stopTyping();
+						});
+					}
+				});
+			}
 		}
 	};
 	if(cmd == `${config.prefix}test`){
