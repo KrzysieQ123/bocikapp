@@ -131,7 +131,7 @@ bot.on("message", function(msg){
 			{
 				var admin;
 				checkPermission(msg.author.id, admin, function(id, admin){
-					if(id==msg.author.id && admin==0){
+					if(id==msg.author.id && admin>0){
 						msg.channel.startTyping();
 						clever.ask(input, function(err, response){
 							msg.reply(response).catch(console.error);
