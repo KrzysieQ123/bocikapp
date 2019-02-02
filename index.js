@@ -254,7 +254,7 @@ bot.on("message", function(msg){
 					}
 					if(number > 100) return msg.channel.send('Użyj: !usun [liczba wiadomości (limit: 100)].');
 					async function clearMessages(){
-						const fetched = await msg.channel.fetchMessages({limit: 100});
+						const fetched = await msg.channel.fetchMessages({limit: number});
 						msg.channel.bulkDelete(fetched).catch(error => msg.channel.send(`${error}`));
 					}
 					clearMessages();
