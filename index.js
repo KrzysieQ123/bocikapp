@@ -1,14 +1,11 @@
 var discord = require("discord.js");
 var fs = require("fs");
-var cleverbot = require("cleverbot.io");
 var yt = require("ytdl-core");
 var ytsearch = require("yt-search");
 var mysql=require('mysql');
 var config = require("./config.json");
 var bot = new discord.Client();
-var clever = new cleverbot('9UoTQha5iaOls8jk','PmVlMYL7vPuh7CeaR1qEflNt4UHkbKh4');
 var volumeMusic=0.25;
-clever.setNick("Bocik");
 function replacePolishLetter(string){
 	var result=string;
 	for(var letter=0; letter<string.length; letter++){
@@ -100,7 +97,6 @@ var connection = mysql.createConnection({
 	password: process.env.password,
 	database: process.env.database
 });
-clever.create(function(err, session){});
 bot.on("error", console.error);
 bot.on("ready", () =>{
 	connection.connect(function(err){
@@ -118,30 +114,7 @@ bot.on("message", function(msg){
 	var cmd = args[0].toLowerCase();
 	var input = msg.content.substring(cmd.length+1);
 	var params = input.split(' ');
-	if(!cmd.startsWith(config.prefix)){
-		if(msg.isMentioned(bot.user)){
-			if(msg.guild.id != 518028075519442946){
-				msg.channel.startTyping();
-				clever.ask(input, function(err, response){
-					msg.reply(response).catch(console.error);
-					msg.channel.stopTyping();
-				});
-			}
-			else
-			{
-				var admin;
-				checkPermission(msg.author.id, admin, function(id, admin){
-					if(id==msg.author.id && admin>0){
-						msg.channel.startTyping();
-						clever.ask(input, function(err, response){
-							msg.reply(response).catch(console.error);
-							msg.channel.stopTyping();
-						});
-					}
-				});
-			}
-		}
-	};
+	if(!cmd.startsWith(config.prefix)) return;
 	if(cmd == `${config.prefix}test`){
 		msg.react('✅');
 	}
